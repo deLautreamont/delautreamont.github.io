@@ -37,13 +37,23 @@ button {
 /* HEADER */
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   align-items: start;
   width: 100%;
   padding: 20px var(--edge-gap) 8px var(--edge-gap);
   line-height: 1.25;
-  z-index: 20;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.header-left,
+.header-right {
+  pointer-events: auto;
 }
 
 .header-left {
@@ -103,16 +113,17 @@ header {
 }
 
 .cut-house-trigger {
-  justify-self: center;
-  align-self: start;
+  display: block;
+  width: auto;
   background: none;
   border: 0;
   padding: 0;
-  margin: 0;
+  margin: 0 0 2px auto;
   color: inherit;
   font-size: var(--text-size);
   line-height: 1.25;
   font-weight: 400;
+  text-align: right;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -121,7 +132,7 @@ header {
 
 .joseph-site {
   display: block;
-  margin-top: 24px;
+  margin-top: 96px;
 }
 
 .container {
@@ -179,7 +190,7 @@ header {
   line-height: 1.25;
   color: inherit;
   padding: 18px;
-  margin-top: 24px;
+  margin-top: 96px;
 }
 
 .jc-exhibition-header {
@@ -280,6 +291,15 @@ body.cut-house-active .cut-house-layer {
 }
 
 body.cut-house-active .header-right {
+  display: block;
+  color: var(--cut-yellow);
+}
+
+body.cut-house-active .header-right a {
+  color: var(--cut-yellow);
+}
+
+body.cut-house-active .contact-links {
   display: none;
 }
 
@@ -419,16 +439,17 @@ body.cut-house-active .cut-house-trigger {
 @media (max-width: 700px) {
   header {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 14px;
     padding: 20px;
-  }
-
-  .cut-house-trigger {
-    justify-self: start;
   }
 
   .header-right {
     justify-self: start;
+    text-align: left;
+  }
+
+  .cut-house-trigger {
+    margin-left: 0;
     text-align: left;
   }
 
@@ -451,11 +472,11 @@ body.cut-house-active .cut-house-trigger {
 
   .jc-exhibition {
     padding: 12px;
-    margin-top: 24px;
+    margin-top: 136px;
   }
 
-  .jc-exhibition-header {
-    margin-bottom: 48px;
+  .joseph-site {
+    margin-top: 136px;
   }
 
   .jc-figure,
@@ -502,17 +523,19 @@ body.cut-house-active .cut-house-trigger {
 
 <header>
   <div class="header-left">
-    <button id="homeTrigger" class="home-trigger logo-trigger" type="button" aria-label="Joseph Cuts">
+    <button id="homeTrigger" class="home-trigger logo-trigger" type="button" aria-label="Joseph Cuts / The Cut House">
       <img class="jc-logo jc-logo-black" src="img/joseph-cuts-logo-black.svg" alt="Joseph Cuts">
       <img class="jc-logo jc-logo-yellow" src="img/joseph-cuts-logo-yellow.svg" alt="Joseph Cuts">
     </button>
   </div>
 
-  <button id="cutHouseTrigger" class="cut-house-trigger">THE CUT HOUSE</button>
-
   <div class="header-right">
-    <p><a href="mailto:info@josephcutsbasel.com">info@josephcutsbasel.com</a></p>
-    <p><a href="https://www.instagram.com/josephcutsbasel" target="_blank">Instagram</a></p>
+    <button id="cutHouseTrigger" class="cut-house-trigger" type="button">THE CUT HOUSE</button>
+
+    <div class="contact-links">
+      <p><a href="mailto:info@josephcutsbasel.com">info@josephcutsbasel.com</a></p>
+      <p><a href="https://www.instagram.com/josephcutsbasel" target="_blank">Instagram</a></p>
+    </div>
   </div>
 </header>
 
@@ -528,9 +551,9 @@ body.cut-house-active .cut-house-trigger {
   <div class="jc-exhibition-header">
     <h1><b>Upcoming:</b></h1>
 
-    <p>Alfatih, Anna Rimmel, Arthur Poujois, Cyril Hübscher, David Meliksetian, Etienne Eisele, Igor Pjörrt, 
+    <p><u>Alfatih, Anna Rimmel, Arthur Poujois, Cyril Hübscher, David Meliksetian, Etienne Eisele, Igor Pjörrt, 
       James Bantone, Marius Erler, Marouane Bakhti, Maurice Sachs, Max Fingerhuth, Nolan Lucidi, Oz Oderbolz,
-    Pavle Nikolić, Rasmus Myrup, Virginie Sistek</p>
+    Pavle Nikolić, Rasmus Myrup, Virginie Sistek</u></p>
 <em>On the House</em>
     <p class="jc-exhibition-meta">
       October 20, 2026, 7PM — 12AM<br>
@@ -539,7 +562,7 @@ body.cut-house-active .cut-house-trigger {
   </div>
 
   <div class="jc-exhibition-header">
-    <h1>Aisha Altenhofen</h1>
+    <h1><u>Aisha Altenhofen</u></h1>
     <em>The Exact Opposite of Precision</em>
 
     <p class="jc-exhibition-meta">
@@ -611,16 +634,9 @@ body.cut-house-active .cut-house-trigger {
 
   </section>
 
-  <p style="font-size: 13px; margin: 32px 0 40px 0;">
-    Documentation: Julian Blum
-  </p>
-
-  <section class="jc-documentation-section jc-documentation-section--second">
-    <h2>Reinstalled in the garden during Art Basel, 2026.</h2>
-
     <figure class="jc-figure jc-figure--large">
       <img src="img/2026_JCI_Aisha/TEOOP-Garden-1.jpg" alt="Installation view, garden" loading="lazy">
-      <figcaption></figcaption>
+      <figcaption>Reinstalled in the garden during Art Basel, 2026.</figcaption>
     </figure>
 
     <figure class="jc-figure jc-figure--large">
@@ -643,7 +659,14 @@ body.cut-house-active .cut-house-trigger {
       <figcaption></figcaption>
     </figure>
 
+  <section class="jc-documentation-section jc-documentation-section--second">
+
+      <p style="font-size: 13px; margin: 32px 0 40px 0;">
+    Documentation: Julian Blum
+        
   </section>
+
+  </p>
 
 </main>
 
@@ -1290,23 +1313,20 @@ body.cut-house-active .cut-house-trigger {
       body.classList.remove("cut-house-active");
     }
 
-    cutHouseTrigger.addEventListener("click", function () {
-      if (body.classList.contains("cut-house-active")) {
-        closeCutHouse();
-        history.pushState(null, "", window.location.pathname);
-        window.scrollTo(0, 0);
-      } else {
-        openCutHouse();
-        history.pushState(null, "", "#cut-house");
-        window.scrollTo(0, 0);
-      }
-    });
+function toggleCutHouse() {
+  if (body.classList.contains("cut-house-active")) {
+    closeCutHouse();
+    history.pushState(null, "", window.location.pathname);
+    window.scrollTo(0, 0);
+  } else {
+    openCutHouse();
+    history.pushState(null, "", "#cut-house");
+    window.scrollTo(0, 0);
+  }
+}
 
-    homeTrigger.addEventListener("click", function () {
-      closeCutHouse();
-      history.pushState(null, "", window.location.pathname);
-      window.scrollTo(0, 0);
-    });
+cutHouseTrigger.addEventListener("click", toggleCutHouse);
+homeTrigger.addEventListener("click", toggleCutHouse);
 
     const toggleTexts = document.querySelectorAll(".toggle-text");
 
